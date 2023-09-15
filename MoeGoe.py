@@ -84,8 +84,8 @@ if __name__ == '__main__':
     else:
         escape = False
 
-    model = input('Path of a VITS model: ')
-    config = input('Path of a config file: ')
+    model = "../vits_models/ruise/1158_epochs.pth" #input('Path of a VITS model: ')
+    config = "../vits_models/ruise/config.json" #input('Path of a config file: ')
 
     hps_ms = utils.get_hparams_from_file(config)
     n_speakers = hps_ms.data.n_speakers if 'n_speakers' in hps_ms.data.keys() else 0
@@ -100,7 +100,7 @@ if __name__ == '__main__':
         hps_ms.train.segment_size // hps_ms.data.hop_length,
         n_speakers=n_speakers,
         emotion_embedding=emotion_embedding,
-        **hps_ms.model)
+        **hps_ms.model).to('cuda')
     _ = net_g_ms.eval()
     utils.load_checkpoint(model, net_g_ms)
 

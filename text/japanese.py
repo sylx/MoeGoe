@@ -81,7 +81,8 @@ def japanese_to_romaji_with_accent(text):
         if re.match(_japanese_characters, sentence):
             if text != '':
                 text += ' '
-            labels = pyopenjtalk.extract_fullcontext(sentence)
+            labels = pyopenjtalk.extract_fullcontext(sentence,run_marine=True)
+
             for n, label in enumerate(labels):
                 phoneme = re.search(r'\-([^\+]*)\+', label).group(1)
                 if phoneme not in ['sil', 'pau']:
