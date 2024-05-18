@@ -1,9 +1,8 @@
 import re
-
+from . import japanese
 
 def japanese_cleaners(text):
-    from text.japanese import japanese_to_romaji_with_accent
-    text = japanese_to_romaji_with_accent(text)
+    text = japanese.japanese_to_romaji_with_accent(text)
     text = re.sub(r'([A-Za-z])$', r'\1.', text)
     return text
 
