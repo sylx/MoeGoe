@@ -3,13 +3,10 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-import commons
-import modules
-import attentions
+from . import commons, modules,attentions
 
 from torch.nn import Conv1d, ConvTranspose1d
 from torch.nn.utils import weight_norm
-from commons import init_weights
 
 
 class StochasticDurationPredictor(nn.Module):
@@ -268,7 +265,7 @@ class Generator(torch.nn.Module):
                 self.resblocks.append(resblock(ch, k, d))
 
         self.conv_post = Conv1d(ch, 1, 7, 1, padding=3, bias=False)
-        self.ups.apply(init_weights)
+        self.ups.apply(commons.init_weights)
 
         if gin_channels != 0:
             self.cond = nn.Conv1d(gin_channels, upsample_initial_channel, 1)

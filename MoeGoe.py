@@ -1,9 +1,8 @@
 from scipy.io.wavfile import write
-from mel_processing import spectrogram_torch
-from text import text_to_sequence, _clean_text
-from models import SynthesizerTrn
-import utils
-import commons
+from .mel_processing import spectrogram_torch
+from .text import text_to_sequence, _clean_text
+from .models import SynthesizerTrn
+from . import utils,commons
 import sys
 import re
 from torch import no_grad, LongTensor
